@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/css/id.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container">
+      <form action="/idData" method="post">
+        <div class="content">
+          <div>전화번호 :</div>
+          <input name="firstNum" class="firstNum" type="text" required />
+          <div>-</div>
+          <input name="secondNum" class="secondNum" type="text" required />
+          <div>-</div>
+          <input name="thirdNum" class="thirdNum" type="text" required />
+        </div>
+        <br />
+        <div onclick="btn()" class="btn">찾기</div>
+      </form>
+      <div class="key"></div>
+    </div>
+  </body>
+  <script src="/js/id.js"></script>
+</html>

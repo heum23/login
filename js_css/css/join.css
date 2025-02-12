@@ -1,0 +1,171 @@
+.btn2 {
+  opacity: 1;
+}
+.btn {
+  opacity: 0.5;
+}
+/* 기본 스타일 */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Arial,
+    sans-serif;
+  background-color: #f5f5f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 100px;
+  flex-direction: column;
+}
+
+/* 회원가입 박스 */
+.login-box {
+  background: white;
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 450px;
+  text-align: center;
+}
+
+/* 제목 */
+h3 {
+  font-size: 22px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* 입력 필드 스타일 */
+input,
+select {
+  width: 100%;
+  padding: 12px;
+  margin: 10px 0;
+  border: 1px solid #d1d1d6;
+  border-radius: 12px;
+  font-size: 16px;
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+/* 입력 필드 포커스 효과 */
+input:focus,
+select:focus {
+  border-color: #0071e3;
+  box-shadow: 0 0 8px rgba(0, 113, 227, 0.2);
+}
+
+/* 성별, 전화번호, 생년월일을 한 줄에 배치 */
+.inline-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  gap: 10px;
+}
+
+/* 성별 선택 스타일 */
+.gender-group {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex: 1;
+}
+
+.gender-group label {
+  font-size: 16px;
+  color: #333;
+}
+
+.gender-group input {
+  width: auto;
+  margin: 0;
+}
+
+/* 전화번호 입력 스타일 */
+.phone-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 5px;
+}
+
+.phone-group input {
+  text-align: center;
+  width: 20%;
+}
+
+/* 생년월일 선택 스타일 */
+.birth-group {
+  display: flex;
+  align-items: center;
+
+  gap: 5px;
+}
+
+.birth-group select {
+  width: 27%;
+  text-align: center;
+}
+
+/* 버튼 기본 스타일 */
+.btn4 {
+  border-radius: 10px;
+  font-weight: 800;
+  background-color: #888;
+  width: 20%;
+  aspect-ratio: 1/0.3;
+}
+.btn5 {
+  align-items: center;
+  justify-content: center;
+}
+.btn {
+  background: #d1d1d6;
+  color: #888;
+  padding: 12px;
+  margin-top: 15px;
+  width: 100%;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: not-allowed;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+/* 활성화된 버튼 스타일 */
+.btn2 {
+  background: linear-gradient(to right, #0071e3, #0051a3);
+  color: white;
+  cursor: pointer;
+  padding: 12px;
+  margin-top: 15px;
+  width: 100%;
+  border-radius: 12px;
+  font-size: 16px;
+  cursor: not-allowed;
+  border: none;
+  transition: all 0.3s ease;
+}
+
+.btn2:hover {
+  background: linear-gradient(to right, #0051a3, #003580);
+  transform: scale(1.05);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 500px) {
+  .login-box {
+    width: 90%;
+  }
+
+  .inline-group {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .phone-group input,
+  .birth-group select {
+    width: 100%;
+  }
+}

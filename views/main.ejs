@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link rel="stylesheet" href="/css/main.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="login">
+      <form action="/emailCheck" method="post">
+        <div class="content">
+          <div>email</div>
+          <input
+            class="email"
+            type="email"
+            name="email"
+            placeholder="email을 입력해주세요."
+            required
+          />
+        </div>
+        <div class="content">
+          <div>비밀번호</div>
+          <input
+            class="pw"
+            type="password"
+            name="pw"
+            placeholder="비밀번호를 입력해주세요."
+            required
+          />
+        </div>
+        <br />
+        <div class="text"></div>
+        <div class="login_btn">
+          <div onclick="idFind()" class="logBtn">id 찾기</div>
+          <div onclick="pwFind()" class="logBtn">비밀번호 찾기</div>
+        </div>
+        <br />
+        <div class="login_btn">
+          <div onclick="check()" class="logBtn">로그인</div>
+          <div onclick="join()" class="logBtn">회원가입</div>
+        </div>
+      </form>
+    </div>
+  </body>
+  <script src="/js/main.js"></script>
+</html>
