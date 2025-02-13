@@ -1,4 +1,21 @@
 const express = require("express");
+const multer = require("multer");
+//path 선언
+const path = require("path");
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    cb(null, "uploads/");
+  },
+  filename: (req, file, cb) => {
+    //원본 파일명에서 확장자 추출
+    const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
+    const ext = path.extname(file.originalname);
+    //파일명에 타임스탭프와 확장자를 포함시켜서 저장
+    cb(null, uniqueSuffix + ext); //timestamp + 확장자
+  },
+});
+const upload = multer({ storage: storage });
+
 const app = express();
 const port = 3000;
 
@@ -7,17 +24,14 @@ const port = 3000;
 app.use(express.urlencoded({ extended: true }));
 //json
 app.use(express.json());
-
-//path 선언
-const path = require("path");
-
 app.use(express.static(path.join(__dirname, "js_css")));
+app.use("/uploads", express.static("uploads"));
 app.set("view engine", "ejs");
 app.set("views", "./views");
 
 //로그인 화면
 app.get("/", (req, res) => {
-  res.render("main", { title: "" });
+  res.render("practice", { title: "" });
 });
 let database = "";
 app.post("/getLocal", (req, res) => {
@@ -71,6 +85,20 @@ app.get("/idFind", (req, res) => {
 //pw 찾기
 app.get("/pwFind", (req, res) => {
   res.render("pw");
+});
+
+//practice
+app.post("/upload", upload.array("files"), (req, res) => {
+  if (req.files) {
+    const fileName = [];
+    req.files.map((item) => {
+      console.log(item.filename);
+      fileName.push(item.filename);
+    });
+    res.send({ url: fileName });
+  } else {
+    console.log("error");
+  }
 });
 
 app.listen(port, () => {

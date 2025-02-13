@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <!-- single -->
+    <h1>파일 한개 올리기!</h1>
+    <form
+      id="formData"
+      onsubmit="submitForm(event)"
+      enctype="multipart/form-data"
+    >
+      <input type="file" name="files" multiple /><br />
+      <input type="text" name="title" />
+      <button type="submit">업로드</button>
+    </form>
+    <h3>파일한개</h3>
+    <div class="files"></div>
+  </body>
+  <script>
+    const submitForm = (event) => {
+      event.preventDefault(); // 기본 폼 제출 방지
+      document.querySelector(".files").innerHTML = "";
+      const form = document.getElementById("formData");
+      const formData = new FormData(form);
+      console.log(formData);
+      axios({
+        method: "post",
+        url: "/upload",
+        data: formData,
+        headers: {
+          "Content-Type": "multipart/form-data", // 멀티파트 폼 데이터 헤더 설정
+        },
+      })
+        .then((res) => {
+          document.querySelector(".files").innerHTML += res.data.url.map(
+            (item) =>
+              `<img style="width:300px; height:300px;" src="/uploads/${item}" />`
+          );
+        })
+        .catch((error) => {
+          console.error("Error:", error);
+        });
+    };
+  </script>
+</html>

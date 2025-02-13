@@ -1,4 +1,10 @@
+const { default: axios } = require("axios");
+
 let database = JSON.parse(localStorage.getItem("userinfo")) || [];
+axios({
+  url:"/userinfo",
+  
+})
 fetch("/userinfo")
   .then((response) => response.json()) // JSON 형식으로 응답 받기
   .then((userinfo) => {
