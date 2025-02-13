@@ -101,3 +101,29 @@ yearSelect.addEventListener("change", updateDays);
 
 // 초기 실행
 updateDays();
+
+// axios
+const submitForm = (event) => {
+  event.preventDefault(); // 기본 폼 제출 방지
+
+  const form = document.getElementById("formData");
+  const formData = new FormData(form);
+
+  const params = {};
+  formData.forEach((value, key) => {
+    params[key] = value;
+  });
+  axios({
+    method: "get",
+    url: "/getData",
+    params: params,
+  })
+    .then((res) => {
+      alert("회원가입 완료");
+      window.location.href = "http://localhost:3000";
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+      alert("회원가입 실패");
+    });
+};

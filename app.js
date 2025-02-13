@@ -17,7 +17,29 @@ app.set("views", "./views");
 
 //로그인 화면
 app.get("/", (req, res) => {
-  res.render("main");
+  res.render("main", { title: "" });
+});
+let database = "";
+app.post("/getLocal", (req, res) => {
+  database = req.body;
+});
+app.post("/getLog", (req, res) => {
+  const check = database.filter(
+    (item) => item.email === req.body.email && item.pw === req.body.pw // 비밀번호가 일치하는지 확인
+  );
+
+  if (check.length < 1) {
+    const emailCheck = database.filter((item) => item.email === req.body.email);
+    if (emailCheck.length > 0) {
+      res.json({ title: "이메일과 비밀번호를 한번 더 확인해주세요." });
+      console.log("로그인 실패");
+    } else {
+      res.json({ title: "이메일이 존재하지 않습니다." });
+    }
+  } else {
+    console.log("로그인 성공");
+    res.json({ title: "로그인 성공" });
+  }
 });
 
 //로그인 성공시
@@ -32,17 +54,15 @@ app.get("/join", (req, res) => {
 });
 
 let userinfo = "";
-app.post("/login", (req, res) => {
-  userinfo = req.body; // userinfo에 데이터 저장
-  //post 요청은 req.body
-  res.render("main", { title: "환영합니다!", userinfo: req.body });
+app.get("/getData", (req, res) => {
+  userinfo = req.query;
+  res.send(userinfo);
+  console.log("회원가입완료");
 });
-
 app.get("/userinfo", (req, res) => {
   // userinfo 사용
   res.json(userinfo); // 클라이언트에게 JSON 형식으로 응답
 });
-
 //id 찾기
 app.get("/idFind", (req, res) => {
   res.render("id");

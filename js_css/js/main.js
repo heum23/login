@@ -12,18 +12,43 @@ fetch("/userinfo")
   })
   .catch((error) => console.error("Error:", error));
 
-const check = () => {
-  let email = document.querySelector(".email").value;
-  let pw = document.querySelector(".pw").value;
-  let text = document.querySelector(".text");
-  const emailCheck = database.filter(
-    (item) => item.email === email && item.pw === pw
-  );
-  if (emailCheck.length > 0) {
-    window.location.href = `/login1?id=${email}`;
-  } else {
-    text.innerHTML = `이메일과 비밀번호가 틀렸습니다`;
-  }
+const submitForm = (event) => {
+  event.preventDefault(); // 기본 폼 제출 방지
+
+  const form = document.getElementById("formData");
+  const formData = new FormData(form);
+
+  const params = {};
+  formData.forEach((value, key) => {
+    params[key] = value;
+  });
+  console.log(params);
+  axios({
+    method: "post",
+    url: "/getLocal",
+    data: database,
+  }).then((res) => {});
+  let login = document.forms["login"];
+  let email = login.elements.email.value;
+  let pw = login.elements.pw.value;
+  axios({
+    method: "post",
+    data: { pw, email },
+    url: "/getLog",
+  })
+    .then((response) => {
+      // 서버에서 받은 응답 값으로 title을 설정
+      const title = response.data.title;
+      if (title === "로그인 성공") {
+        document.querySelector(".text").innerText = title;
+        window.location.href = `/login1?id=${email}`;
+      } else {
+        document.querySelector(".text").innerText = title;
+      }
+    })
+    .catch((error) => {
+      console.error("Error:", error);
+    });
 };
 const join = () => {
   window.location.href = `/join`;

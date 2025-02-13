@@ -20,6 +20,7 @@
   "homepage": "https://github.com/heum23/login#readme",
   "keywords": [],
   "dependencies": {
+    "axios": "^1.7.9",
     "ejs": "^3.1.10",
     "express": "^4.21.2"
   },
