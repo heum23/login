@@ -88,6 +88,14 @@ app.get("/pwFind", (req, res) => {
 });
 
 //practice
+app.post("/uploads", upload.single("files"), (req, res) => {
+  if (req.file) {
+    res.send({ url: req.file.filename });
+  } else {
+    console.log("error");
+  }
+});
+
 app.post("/upload", upload.array("files"), (req, res) => {
   if (req.files) {
     const fileName = [];
@@ -100,7 +108,6 @@ app.post("/upload", upload.array("files"), (req, res) => {
     console.log("error");
   }
 });
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
